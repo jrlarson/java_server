@@ -5,6 +5,6 @@ import java.net.MalformedURLException;
 
 public interface SearchAPIClient {
 
-	String artistSearch(String searchParam) throws RuntimeException, MalformedURLException, IOException;
-	
+  String search(String searchParam) throws RuntimeException, MalformedURLException, IOException;
+
 }

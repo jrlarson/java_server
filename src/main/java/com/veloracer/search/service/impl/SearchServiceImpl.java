@@ -12,18 +12,15 @@ import com.veloracer.search.service.SearchService;
 @Service
 public class SearchServiceImpl implements SearchService {
 
-	@Autowired
-	private SearchAPIClient searchClient;
+  @Autowired
+  private SearchAPIClient searchClient;
 
-	@Override
-	public String getData(String searchTerm) throws MalformedURLException, RuntimeException, IOException {
-		
-		// Just in case 
-		return searchClient.artistSearch(searchTerm);
-		
-	}
+  @Override
+  public String getData(String searchTerm) throws MalformedURLException, RuntimeException, IOException {
+
+    // Just in case
+    return searchClient.search(searchTerm);
+
+  }
 
 }
-
-
-

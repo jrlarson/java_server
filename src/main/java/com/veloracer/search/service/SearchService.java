@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 public interface SearchService {
-	
-	String getData(String searchTerm) throws MalformedURLException, RuntimeException, IOException;
+
+  String getData(String searchTerm) throws MalformedURLException, RuntimeException, IOException;
 
 }

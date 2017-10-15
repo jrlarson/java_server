@@ -16,45 +16,43 @@ import com.veloracer.search.api.client.SearchAPIClient;
 @Service
 @PropertySource("classpath:application.properties")
 public class ITunesSearchClientImpl implements SearchAPIClient {
-	
-    @Value("${ITunesSearchEndpoint}")
-    private String searchURL;
 
-	public String artistSearch(String searchParam) throws RuntimeException, MalformedURLException, IOException {
+  @Value("${ITunesSearchEndpoint}")
+  private String searchURL;
 
-		StringBuffer response = new StringBuffer("");
-		
-		try {
-			
-			URL url = new URL(searchURL.concat(searchParam));
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Accept", "application/json");
+  @Override
+  public String search(String searchParam) throws RuntimeException, MalformedURLException, IOException {
 
-			if (conn.getResponseCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ conn.getResponseCode());
-			}
+    StringBuffer response = new StringBuffer("");
 
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					(conn.getInputStream())));
+    try {
 
-			String streamInput;
-			while ((streamInput = reader.readLine()) != null) {
-				response.append(streamInput);
-				System.out.println(streamInput);
-			}
-			conn.disconnect();
+      URL url = new URL(searchURL.concat(searchParam));
+      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+      conn.setRequestMethod("GET");
+      conn.setRequestProperty("Accept", "application/json");
 
-		} catch (MalformedURLException e) { 
-			throw(e); 
-		} catch (IOException e) { 
-			throw(e); 
-		}
-		
-		return response.toString();
+      if (conn.getResponseCode() != 200) {
+        throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+      }
 
-	}
+      BufferedReader reader = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+
+      String streamInput;
+      while ((streamInput = reader.readLine()) != null) {
+        response.append(streamInput);
+        System.out.println(streamInput);
+      }
+      conn.disconnect();
+
+    } catch (MalformedURLException e) {
+      throw (e);
+    } catch (IOException e) {
+      throw (e);
+    }
+
+    return response.toString();
+
+  }
 
 }
-
